@@ -18,6 +18,7 @@ function Index() {
         <Typography variant='body1'> Step 2) Click on the "Upload File" button and upload that file</Typography>
 
         <FileUploadForm />
+        
       </Stack>
       
     </div>

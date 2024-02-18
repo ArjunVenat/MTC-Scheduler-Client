@@ -25,9 +25,10 @@ interface Row {
 
 interface MyTableProps {
   fileData: File | null;
+  onChange: (choices: any) => void; // Define the onChange prop
 }
 
-const MyTable: React.FC<MyTableProps> = ({ fileData }) => {
+const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
   const [data, setData] = useState<Row[]>([]);
 
   useEffect(() => {
@@ -35,16 +36,19 @@ const MyTable: React.FC<MyTableProps> = ({ fileData }) => {
       const reader = new FileReader();
   
       reader.onload = (e) => {
-        const workbook = XLSX.read(e.target?.result, { type: 'binary' });
+        const workbook = XLSX.read(e.target?.result as string, { type: 'binary' });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
   
-        // Explicitly type excelData as string[]
-        const excelData: string[] = XLSX.utils.sheet_to_json(sheet, { header: 'A' });
+        // Extract data from column R
+        const columnRData: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 }).map((row: any) => row[17]);
   
-        const rows = excelData.map((name: string, index: number) => ({
+        // Filter out undefined or non-string values
+        const validColumnRData: string[] = columnRData.filter((value: any) => typeof value === 'string');
+  
+        const rows: Row[] = validColumnRData.map((value: string, index: number) => ({
           id: index + 1,
-          name,
+          name: value,
           socialButterflyScore: 3, // Set a default score if needed
           prioritize: false, // Set a default prioritize value if needed
         }));
@@ -68,23 +72,30 @@ const MyTable: React.FC<MyTableProps> = ({ fileData }) => {
     );
   };
 
+  useEffect(() => {
+    // Call the onChange function with the current data when it changes
+    if (onChange) {
+      onChange(data);
+    }
+  }, [data, onChange]);
+
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Rate</TableCell>
-            <TableCell>Prioritize?</TableCell>
+            <TableCell>Rate the student's "Social Butterfly"</TableCell>
+            <TableCell>Prioritize? (Check if Yes)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {data.slice(2).map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.name}</TableCell>
               <TableCell>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">Rate</FormLabel>
+                  <FormLabel component="legend">"Social Butterfly" Score</FormLabel>
                   <RadioGroup row>
                     {[1, 2, 3, 4, 5].map((value) => (
                       <FormControlLabel
@@ -123,4 +134,4 @@ const MyTable: React.FC<MyTableProps> = ({ fileData }) => {
   );
 };
 
-export default MyTable;
+export default ParameterTable;
