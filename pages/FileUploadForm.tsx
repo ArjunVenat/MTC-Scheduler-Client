@@ -1,5 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Button, Stack, Grid, LinearProgress, Typography } from '@mui/material';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import SendIcon from '@mui/icons-material/Send';
 import ParameterTable from './ParameterTable';
 
 interface FileUploadComponentProps {
@@ -75,7 +78,7 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = () => {
             onChange={handleFileChange}
           />
           <label htmlFor="contained-button-file">
-            <Button variant="contained" color="primary" component="span">
+            <Button variant="contained" color="primary" component="span" endIcon={<AttachFileIcon />}>
               Upload File
             </Button>
           </label>
@@ -88,23 +91,16 @@ const FileUploadComponent: React.FC<FileUploadComponentProps> = () => {
                 </div>
 
                 <Stack spacing={2}>
+                <Typography variant='body1' align='center'> Step 3) Fill out the table below </Typography>
+
                   <ParameterTable fileData={file} onChange={handleParameterTableChange} />
                   <Button
                     onClick={(e) => handleSubmit(e, apiEndpoint1, true, "cleaned.xlsx")}
                     variant="contained"
                     color="primary"
+                    endIcon={<SaveAltIcon />}
                   >
-                    Save Choices and Get Cleaned Files
-                  </Button>
-                </Stack>
-
-                <Stack spacing={2}>
-                  <Button
-                    onClick={(e) => handleSubmit(e, apiEndpoint2, false, "output.xlsx")}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Get Output Solution
+                    Get Solution
                   </Button>
                 </Stack>
               </Stack>

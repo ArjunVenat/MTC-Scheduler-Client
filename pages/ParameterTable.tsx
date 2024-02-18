@@ -19,7 +19,7 @@ import * as XLSX from 'xlsx';
 interface Row {
   id: number;
   name: string;
-  socialButterflyScore: number;
+  social_credit_score: number;
   prioritize: boolean;
 }
 
@@ -49,8 +49,8 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
         const rows: Row[] = validColumnRData.map((value: string, index: number) => ({
           id: index + 1,
           name: value,
-          socialButterflyScore: 3, // Set a default score if needed
-          prioritize: false, // Set a default prioritize value if needed
+          social_credit_score: 3, //default score
+          prioritize: false, //default value
         }));
   
         setData(rows);
@@ -62,7 +62,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
 
   const handleRadioChange = (id: number, value: string) => {
     setData((prevData) =>
-      prevData.map((row) => (row.id === id ? { ...row, socialButterflyScore: parseInt(value, 10) } : row))
+      prevData.map((row) => (row.id === id ? { ...row, social_credit_score: parseInt(value, 10) } : row))
     );
   };
 
@@ -85,7 +85,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Rate the student's "Social Butterfly"</TableCell>
+            <TableCell>Select the student's "Social Credit" score</TableCell>
             <TableCell>Prioritize? (Check if Yes)</TableCell>
           </TableRow>
         </TableHead>
@@ -95,7 +95,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
               <TableCell>{row.name}</TableCell>
               <TableCell>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">"Social Butterfly" Score</FormLabel>
+                  <FormLabel component="legend">"Social Credit" Score</FormLabel>
                   <RadioGroup row>
                     {[1, 2, 3, 4, 5].map((value) => (
                       <FormControlLabel
@@ -103,7 +103,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange }) => {
                         value={value.toString()}
                         control={
                           <Radio
-                            checked={row.socialButterflyScore === value}
+                            checked={row.social_credit_score === value}
                             onChange={(e) => handleRadioChange(row.id, e.target.value)}
                           />
                         }
