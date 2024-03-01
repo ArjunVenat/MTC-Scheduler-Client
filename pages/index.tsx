@@ -15,7 +15,7 @@ function Index() {
       <Stack alignItems={'center'} spacing={4}>
         <Typography variant='h4' align='center'><b>MTC Scheduler</b></Typography>
         <Typography variant='body1'> Step 1) Export the results of the Qualtrics survey as an Excel file</Typography>
-        <Typography variant='body1'> Step 2) Click on the "Upload File" button and upload that file</Typography>
+        <Typography variant='body1'> Step 2) Click on the &quot;Upload File&quot; button and upload that file</Typography>
 
         <FileUploadForm />
         

@@ -121,7 +121,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange, isCleanedU
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Select the student's Social Credit Score</TableCell>
+            <TableCell>Select the student&apos;s Social Credit Score</TableCell>
             <TableCell>Prioritize? (Check if Yes)</TableCell>
           </TableRow>
         </TableHead>
