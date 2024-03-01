@@ -89,8 +89,6 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange, isCleanedU
           setData(rows);
         } catch (error) {
           console.error('Error parsing Excel file:', error);
-          // Handle the error gracefully, e.g., display a user-friendly message or reset the state
-          // You might display a notification to the user indicating that there was an issue with the file
         }
       };
 
@@ -123,7 +121,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange, isCleanedU
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Select the student's "Social Credit" score</TableCell>
+            <TableCell>Select the student's Social Credit Score</TableCell>
             <TableCell>Prioritize? (Check if Yes)</TableCell>
           </TableRow>
         </TableHead>
@@ -133,7 +131,7 @@ const ParameterTable: React.FC<MyTableProps> = ({ fileData, onChange, isCleanedU
               <TableCell>{row.name}</TableCell>
               <TableCell>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">"Social Credit" Score</FormLabel>
+                  <FormLabel component="legend">Social Credit Score</FormLabel>
                   <RadioGroup row>
                     {[1, 2, 3, 4, 5].map((value) => (
                       <FormControlLabel
