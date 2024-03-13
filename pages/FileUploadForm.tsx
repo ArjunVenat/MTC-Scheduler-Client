@@ -10,8 +10,8 @@ interface FileUploadComponentProps {
 }
 
 const FileUploadComponent: React.FC<FileUploadComponentProps> = () => {
-  const apiEndpoint1 = "http://localhost:5000/get_cleaned";
-  const apiEndpoint2 = "http://localhost:5000/get_solution";
+  const apiEndpoint1 = "http://localhost:5000/api/get_cleaned";
+  const apiEndpoint2 = "http://localhost:5000/api/get_solution";
 
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
